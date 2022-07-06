@@ -12,7 +12,7 @@ module Colors = {
 
 module Constants = {
   let fontFamily = "'DM Sans', sans-serif;"
-  let gradient = "linear-gradient(0deg, rgba(255,181,0,1) 0%, rgba(255,130,0,1) 100%);"
+  let gradient = "linear-gradient(to bottom, #ff8000, #ff8e00, #ff9c00, #ffa900, #ffb600);"
   let gradients = "linear-gradient(
     180deg,
     hsl(43deg 100% 50%) 0%,

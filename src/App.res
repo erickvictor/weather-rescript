@@ -6,13 +6,11 @@ Emotion.injectGlobal({
   },
   "html, body, #root": {
     "width": "100%",
-    "height": "100%",
     "margin": "0",
     "padding": "0",
     "position": "relative",
-  },
-  "#root": {
-    "background": Theme.Constants.gradients,
+    "background": Theme.Constants.gradient,
+    "backgroundSize": "400% 400%",
   },
   "*": {
     "boxSizing": "border-box",

@@ -19,7 +19,9 @@ Emotion.injectGlobal({
   },
 })
 
+let client = ReactQuery.Provider.createClient()
+
 @react.component
 let make = () => {
-  <Container> <Weather /> </Container>
+  <ReactQuery.Provider client> <Container> <Weathers /> </Container> </ReactQuery.Provider>
 }

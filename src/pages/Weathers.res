@@ -1,7 +1,16 @@
 open Ancestor.Default
 
+let { useWeather } = module(WeathersHook)
+
 @react.component
 let make = () => {
+  let result = useWeather()
+
+  switch result {
+  | Data(weather) => Js.log(weather)
+  | Loading => Js.log("Loading...")
+  | Error => Js.log("Error :(")
+  }
   <Box display=[#xs(#flex)] justifyContent=[#xs(#center)] flexDirection=[#xs(#column)]>
     <Typography
       tag=#h1 color=[#xs(#hex("#fafafa"))] textAlign=[#xs(#center)] fontSize=[#xs(3.3->#rem)]>

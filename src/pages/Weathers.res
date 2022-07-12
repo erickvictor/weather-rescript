@@ -1,5 +1,13 @@
 open Ancestor.Default
 
+module Styles = {
+  open Emotion
+
+  let ulWrapper = css({
+    "column-count": "2",
+  })
+}
+
 let {useWeather} = module(WeathersHook)
 
 @react.component
@@ -28,22 +36,26 @@ let make = () => {
         fontWeight=[#xs(#bold)]>
         {`Capitais`->React.string}
       </Typography>
-      <List />
-      {if results->Js.Array2.some(result => result.isLoading) {
-        <p> {`Load`->React.string} </p>
-      } else {
-        Js.log2(`res`, results)
-        results->Js.Array2.map(result =>
-          switch result {
-          | {data: Some(Ok(weather))} => <p key={weather.name}>
-              {weather.main.temp_min->React.float} {`º `->React.string }
-              {weather.main.temp_max->React.float}
-              {`º `->React.string } {weather.name->React.string} 
-            </p>
-          | _ => <p> {`Error`->React.string} </p>
-          }
-        )->React.array
-      }}
+      <Base tag=#ul p=[xs(0)] className=Styles.ulWrapper>
+        {if results->Js.Array2.some(result => result.isLoading) {
+          <p> {`Load`->React.string} </p>
+        } else {
+          results
+          ->Js.Array2.map(result =>
+            switch result {
+            | {data: Some(Ok(weather))} =>
+              <List
+                key={weather.name}
+                min=weather.main.temp_min
+                max=weather.main.temp_max
+                name=weather.name
+              />
+            | _ => <p> {`Error`->React.string} </p>
+            }
+          )
+          ->React.array
+        }}
+      </Base>
     </Box>
   </Box>
 }

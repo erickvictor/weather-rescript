@@ -1,16 +1,11 @@
 open Ancestor.Default
 
-let { useWeather } = module(WeathersHook)
+let {useWeather} = module(WeathersHook)
 
 @react.component
 let make = () => {
-  let result = useWeather()
+  let results = useWeather()
 
-  switch result {
-  | Data(weather) => Js.log(weather)
-  | Loading => Js.log("Loading...")
-  | Error => Js.log("Error :(")
-  }
   <Box display=[#xs(#flex)] justifyContent=[#xs(#center)] flexDirection=[#xs(#column)]>
     <Typography
       tag=#h1 color=[#xs(#hex("#fafafa"))] textAlign=[#xs(#center)] fontSize=[#xs(3.3->#rem)]>
@@ -34,6 +29,21 @@ let make = () => {
         {`Capitais`->React.string}
       </Typography>
       <List />
+      {if results->Js.Array2.some(result => result.isLoading) {
+        <p> {`Load`->React.string} </p>
+      } else {
+        Js.log2(`res`, results)
+        results->Js.Array2.map(result =>
+          switch result {
+          | {data: Some(Ok(weather))} => <p key={weather.name}>
+              {weather.main.temp_min->React.float} {`º `->React.string }
+              {weather.main.temp_max->React.float}
+              {`º `->React.string } {weather.name->React.string} 
+            </p>
+          | _ => <p> {`Error`->React.string} </p>
+          }
+        )->React.array
+      }}
     </Box>
   </Box>
 }

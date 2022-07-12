@@ -1,10 +1,12 @@
 open Ancestor.Default
+open Render
 
 @react.component
 let make = () => {
+
   <Base tag=#ul p=[xs(0)]>
     <Base tag=#li listStyleType=[#xs(#none)] fontWeight=[#xs(#bold)] mb=[#xs(1)]>
-      {`18º 27º Rio de Janeiro`->React.string}
+      {`18º 27º Rio de Janeiro`->s}
     </Base>
     <Base tag=#li listStyleType=[#xs(#none)] fontWeight=[#xs(#bold)] mb=[#xs(1)]>
       {`14º 22º São Paulo`->React.string}
@@ -16,4 +18,5 @@ let make = () => {
       {`24º 37º Brasília`->React.string}
     </Base>
   </Base>
+
 }

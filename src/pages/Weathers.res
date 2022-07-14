@@ -38,7 +38,7 @@ let make = () => {
       </Typography>
       <Base tag=#ul p=[xs(0)] className=Styles.ulWrapper>
         {if results->Js.Array2.some(result => result.isLoading) {
-          <p> {`Load`->React.string} </p>
+          <Loading />
         } else {
           results
           ->Js.Array2.map(result =>
